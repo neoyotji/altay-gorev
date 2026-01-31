@@ -19,17 +19,18 @@ tespit_edilenler = []
 def satir_incele(satir, kurallar):
     temiz_satir = log_decode(satir)
     simdi = time.time()
-    bulundu_mu = False
+    ihlal_bulundu = False
 
     for kural in kurallar:
         anahtar = kural.get('anahtar_kelime') or kural.get('pattern')
         
-        if anahtar in temiz_satir:
+        if anahtar and anahtar in temiz_satir:
             kural_id = kural['id']
             if kural_id not in olay_hafizasi:
                 olay_hafizasi[kural_id] = []
             
             olay_hafizasi[kural_id].append(simdi)
+            
             pencere = kural.get('pencere_sn') or kural.get('time_window', 0)
             gecerli_olaylar = [t for t in olay_hafizasi[kural_id] if t > simdi - pencere]
             olay_hafizasi[kural_id] = gecerli_olaylar
@@ -43,10 +44,8 @@ def satir_incele(satir, kurallar):
                 }
                 if olay not in tespit_edilenler:
                     tespit_edilenler.append(olay)
-                
-                print(f"{olay['kural']} tespit edild")
-                bulundu_mu = True
-    return bulundu_mu
+                ihlal_bulundu = True
+    return ihlal_bulundu
 
 def dosyayi_izle(dosya_yolu, kurallar):
     with open(dosya_yolu, 'r') as f:
