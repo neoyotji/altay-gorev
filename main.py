@@ -19,7 +19,14 @@ def ana_menu():
         secim = input(":")
 
         if secim == "1":
+            print("\nSistem logları taranıyor.")
             otomatik_sistem_taramasi(kural_listesi)
+            
+            if tespit_edilenler:
+                print("Tespitler bulundu, rapor dosyası oluşturuldu. 3. seçeneği seçiniz.")
+                rapor_olustur(tespit_edilenler)
+            else:
+                print("[i] Herhangi bir tehdit tespit edilemediği için rapor oluşturulmadı.")
 
         elif secim == "2":
             yol = input("İzlenecek dosya yolu : ")
@@ -64,7 +71,7 @@ def otomatik_sistem_taramasi(kurallar):
         else:
             print(f"{yol} bulunamadı")
             
-    print("\nTarama tamamlandı. Dosyayı kaydedebilirsiniz.")            
+    print("\nTarama tamamlandı. ")            
 
 if __name__ == "__main__":
     ana_menu()
