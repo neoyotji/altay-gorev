@@ -1,0 +1,25 @@
+kurallar:
+  - id: 4625
+    isim: "hatali login denemesi tespit edildi"
+    anahtar_kelime: "Failed password"
+    esik_degeri: 3
+    pencere_sn: 60
+
+  - id: 4648
+    isim: "Yetki kullanimi"
+    anahtar_kelime: "explicit credentials"
+    esik_degeri: 1
+    pencere_sn: 0
+    
+  - id: 101
+    isim: "SSH Brute Force Attempt"
+    anahtar_kelime: "Failed password for"
+    threshold: 5             
+    time_window: 60          
+    severity: "Critical"
+
+  - id: 102
+    isim: "UFW Block Event"
+    anahtar_kelime: "UFW Block"
+    threshold: 1
+    severity: "Low"
